@@ -5,7 +5,7 @@ from unittest.mock import MagicMock
 import pytest
 from freezegun import freeze_time
 
-from src.attempt_three import caching_decorator
+from mycaching.attempt_three import caching_decorator
 
 extra_mock = MagicMock()
 
