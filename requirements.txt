@@ -1,0 +1,12 @@
+#dev
+cachetools
+expiringdict
+jsons
+types-cachetools
+#test
+tox
+pytest==7.2.2
+pytest-sugar==0.9.6
+black==23.1.0
+mypy==1.1.1
+freezegun==1.2.2
