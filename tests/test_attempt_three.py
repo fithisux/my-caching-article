@@ -52,8 +52,20 @@ class TestOperation(unittest.TestCase):
             value = expire_something.cache.get('["DEFGH"]')
         self.assertEqual(None, value)
 
+    def test_extra_element(self):
+        expire_something("A1")
+        with do_something.lock:
+            value = expire_something.cache.get('["A1"]')
+        self.assertEqual("123", value)
+        expire_something("A2")
+        with expire_something.lock:
+            value = expire_something.cache.get('["A1"]')
+        self.assertEqual(None, value)
+        with expire_something.lock:
+            value = expire_something.cache.get('["A2"]')
+        self.assertEqual("123", value)
+
 
 @caching_decorator(max_len=1, max_age_seconds=2)
 def expire_something(some_arg: str):
-    extra_mock()
     return "123"
